@@ -92,13 +92,17 @@ export default {
 			// toKinDetails: "/kin/:kid",
 			// 加载时的高度和背景颜色，由父组件传过来
 			// 将其设置为CSS变量，根据传值不同，展示效果不同
-			loadingHeight: 520,
+			loadingHeight: 360,
 			loadingBgc: "red",
 			originLink: "1",
 			kinDesc: "1",
 			kinAuthor: "1",
 			footerIsActive: false,
 		};
+	},
+	mounted() {
+		// 在组件渲染完成时，给父组件发送完成事件
+		this.$emit("itemLoaded");
 	},
 	methods: {
 		// 统一采用$router.replace()进行站内跳转，a标签需要的是完整链接

@@ -7,8 +7,8 @@
 			v-for="(item, index) in imgList"
 			:key="index"
 			:imgUrl="item"
-			v-images-loaded="imgLoaded"
 			@moreClick="moreClick"
+			@itemLoaded="reflow"
 		>
 		</GLPhotoItem>
 	</div>
@@ -41,7 +41,6 @@ export default {
 				"assets/images/21.jpeg",
 				"assets/images/22.jpeg",
 				"assets/images/23.jpeg",
-
 				"assets/images/08.jpeg",
 				"assets/images/09.jpeg",
 				"assets/images/10.jpeg",
@@ -71,35 +70,8 @@ export default {
 				"https://i.pinimg.com/736x/81/8c/46/818c46b538d5d618ee1242f2928db0c4.jpg",
 				"https://i.pinimg.com/736x/23/c5/7e/23c57edecc001cab1611ccc6623a6dde.jpg",
 				"https://i.pinimg.com/736x/ce/c8/95/cec895e2d6bc11f274f533f385158ca8.jpg",
-				"https://i.pinimg.com/736x/3e/ae/78/3eae782ff31b2b6771f057a0314b15db.jpg",
-				"https://i.pinimg.com/736x/02/78/01/027801afb8578a80bb65296379113c53.jpg",
-				"https://i.pinimg.com/736x/b5/5a/c3/b55ac3415e4ef0e8a0d198d20d4676a6.jpg",
-				"https://i.pinimg.com/736x/da/ed/bf/daedbf7df1a692a4d876710b1e9dc512.jpg",
-				"https://i.pinimg.com/736x/db/f0/94/dbf0940784551213bc8c18b5a1f2907d.jpg",
-				"https://i.pinimg.com/736x/85/5f/b2/855fb2d0078e98890be8641f455cc27c.jpg",
-				"https://i.pinimg.com/736x/e5/c1/ac/e5c1acfaaa6125b6a4c19ea30591420b.jpg",
-				"https://i.pinimg.com/736x/d1/c4/18/d1c41805e5c8bfe3305fc1820d2f2b89.jpg",
-				"https://i.pinimg.com/736x/88/db/74/88db748c6fa1dde1b51aa97df01a1893.jpg",
-				"https://i.pinimg.com/736x/28/39/a9/2839a9f02c762d1907d63411f8420032.jpg",
-				"https://i.pinimg.com/736x/21/db/7c/21db7cc971b942ff2b3a7220f86268a6.jpg",
-				"https://i.pinimg.com/736x/dd/b1/92/ddb192ba93c0483fbd8bd8d1a887da4c.jpg",
-				"https://i.pinimg.com/736x/e2/4e/b5/e24eb59d622a5a894c06ef7138ac38e6.jpg",
-				"https://i.pinimg.com/736x/cf/3a/d8/cf3ad88626d15405701c2f3d2d8fa995.jpg",
-				"https://i.pinimg.com/736x/1e/e4/dd/1ee4dda9360489e3e0c0f1b0e1aaa009.jpg",
-				"https://i.pinimg.com/736x/38/84/6a/38846a160be024ee2970b954021e13c3.jpg",
-				"https://i.pinimg.com/736x/23/3b/37/233b3779e558113ab8bafccb16975065.jpg",
-				"https://i.pinimg.com/736x/08/33/19/083319b415f421c6c17e51f7bc520240.jpg",
-				"https://i.pinimg.com/736x/c8/0a/3f/c80a3fbbe8a0f06735fb180b6bbfcbb1.jpg",
-				"https://i.pinimg.com/736x/a9/31/08/a93108f0dd96d7245d64ac97f25afbb0.jpg",
-				"https://i.pinimg.com/736x/01/80/2a/01802a93b6522ee529938a6627ba0430.jpg",
-				"https://i.pinimg.com/736x/10/f8/2f/10f82f22bfcd7daedd6a18ce9375f6f0.jpg",
-				"https://i.pinimg.com/736x/9e/cf/4a/9ecf4abe66e990637affc8557dc182cf.jpg",
-				"https://i.pinimg.com/736x/d8/f8/44/d8f844abd364bee2292b2a0982065bbc.jpg",
-				"https://i.pinimg.com/736x/94/82/e9/9482e9b59319d1ea6abb023fbc0c41b0.jpg",
-				"https://i.pinimg.com/736x/1f/0a/c8/1f0ac8bf19b6942e161013fb9e86b37d.jpg",
-				"https://i.pinimg.com/736x/66/cc/a3/66cca305253f786e521a1d484c387318.jpg",
-				"https://i.pinimg.com/736x/93/94/c6/9394c6caa776915e93f108586922168e.jpg",
-				"https://i.pinimg.com/736x/80/7f/cf/807fcff92239bf52131015e0e425a648.jpg",
+			],
+			imgListAll: [
 				"https://i.pinimg.com/736x/b4/9b/8f/b49b8f52d1d91c4bf4d5adcb09075702.jpg",
 				"https://i.pinimg.com/736x/3b/f1/91/3bf1917375b6ebd59930255228d7a9d0.jpg",
 				"https://i.pinimg.com/736x/76/bd/c9/76bdc9b121abf86f5b4b6f9302670c88.jpg",
@@ -111,20 +83,12 @@ export default {
 				"https://i.pinimg.com/736x/e9/20/26/e92026e538189cb3bc7959241854c35b.jpg",
 				"https://i.pinimg.com/736x/56/4a/8a/564a8a698f023bc50cedae008fea5604.jpg",
 				"https://i.pinimg.com/736x/93/a8/d8/93a8d8dac7b99af0b6bcca37c83dbc6d.jpg",
-				"https://i.pinimg.com/736x/ec/3f/12/ec3f12c40164e4abe4d5a5a46a3e60e9.jpg",
-				"https://i.pinimg.com/736x/a1/fd/fb/a1fdfbd74b849960711e32506829f383.jpg",
-				"https://i.pinimg.com/736x/61/fc/f8/61fcf801acb72e300f8f6b2b0b83761b.jpg",
-				"https://i.pinimg.com/736x/24/9b/c7/249bc7be4a1e4fbe9c8d98fb244391d1.jpg",
-				"https://i.pinimg.com/736x/58/60/ba/5860ba0f5eeeca6aafe135bbf32cc16d.jpg",
-				"https://i.pinimg.com/736x/d0/e8/ca/d0e8caadc991931f8c9b22aeae06d4de.jpg",
-				"https://i.pinimg.com/736x/f8/df/ba/f8dfba52036e24b8b25befc80d6c0858.jpg",
-				"https://i.pinimg.com/736x/37/60/d9/3760d948f67ba6662a10f20772605f6d.jpg",
 				"https://i.pinimg.com/736x/ac/f0/fa/acf0fa88f068197c00b987a9e88c997e.jpg",
 				"https://i.pinimg.com/736x/eb/20/27/eb2027011d6ccbb808ef04f2976dcba0.jpg",
 				"https://i.pinimg.com/736x/16/ef/00/16ef00e1ec7f56db7e9ac17ad7a4d13e.jpg",
 				"https://i.pinimg.com/736x/96/91/0c/96910c036597ee3ca7c8d6860520553d.jpg",
 			],
-
+			pages: 1,
 			indexRow: 0,
 			colCount: 0,
 			kinWidth: 252,
@@ -136,6 +100,7 @@ export default {
 		window.addEventListener("resize", this.reflows);
 		// 监听图片懒加载，当懒加载完成即loaded，就更新页面
 		this.$Lazyload.$on("loaded", this.reflows);
+		window.addEventListener("scroll", this.getScroll, true);
 	},
 	destroyed() {
 		window.removeEventListener("resize", this.reflows);
@@ -151,18 +116,24 @@ export default {
 		 * 防抖包装
 		 */
 		reflows() {
-			// let that = this;
-
-			// return (function () {
-			// 	if (that.timer) {
-			// 		clearTimeout(that.timer);
-			// 	}
-			// 	that.timer = setTimeout(() => {
-			// 		that.reflow();
-			// 	}, 200);
-			// })();
 			this.debounce(this.reflow, 100)();
 		},
+		// 下拉加载更多
+		getScroll() {
+			// console.log(e.target);
+			let scrollTop = document.documentElement.scrollTop;
+			let clientHeight = document.documentElement.clientHeight;
+			if (scrollTop > this.columnHeight[4] - clientHeight) {
+				this.imgList.push(...this.imgListAll);
+				console.log("loadmore");
+				// this.lastScrollTop = scrollTop;
+				this.pages++;
+			}
+			// console.log(document.documentElement.clientHeight);
+		},
+		// 监听item就不用监听图片加载完成了
+		// v-images-loaded="imgLoaded"
+		// 监听 图片item组件加载完成
 		imgLoaded() {
 			this.reflows();
 		},
@@ -208,6 +179,7 @@ export default {
 			let h = this.columnHeight.reduce((num1, num2) => {
 				return num1 > num2 ? num1 : num2;
 			});
+
 			let w = this.colCount * this.kinWidth;
 			// < 1920
 			// 	? this.colCount * this.kinWidth
