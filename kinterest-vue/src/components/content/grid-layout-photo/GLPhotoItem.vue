@@ -3,18 +3,21 @@
 		<div class="item-wrapper">
 			<div class="kin">
 				<div class="kin-for-modal">
-					<div class="kin-content">
-						<a :href="toKinDetails">
-							<div class="kin-wrapper">
-								<!-- <img :src="require('@/' + imgUrl)" alt="" /> -->
-								<img :src="imgUrl" alt="" />
-							</div>
-						</a>
+					<div
+						class="kin-content"
+						:style="{
+							'--loading-height': loadingHeight + 'px',
+							'--loading-bgc': loadingBgc,
+						}"
+					>
+						<div class="kin-wrapper">
+							<!-- <img :src="require('@/' + imgUrl)" alt="" /> -->
+							<!-- <img :src="imgUrl" alt="" /> -->
+							<img v-lazy="imgUrl" alt="" :key="imgUrl" />
+						</div>
 					</div>
 					<div class="modal cursor">
-						<a :href="toKinDetails">
-							<div class="modal-bg opacity-1"></div>
-						</a>
+						<div class="modal-bg opacity-1" @click="toKinDetails"></div>
 						<div class="modal-content" @click.stop>
 							<div class="modal-header">
 								<div class="select-pop">
@@ -85,9 +88,12 @@ export default {
 	},
 	data() {
 		return {
-			toKinDetails: "/kin",
+			kid: "123",
 			// toKinDetails: "/kin/:kid",
-
+			// 加载时的高度和背景颜色，由父组件传过来
+			// 将其设置为CSS变量，根据传值不同，展示效果不同
+			loadingHeight: 520,
+			loadingBgc: "red",
 			originLink: "1",
 			kinDesc: "1",
 			kinAuthor: "1",
@@ -95,6 +101,10 @@ export default {
 		};
 	},
 	methods: {
+		// 统一采用$router.replace()进行站内跳转，a标签需要的是完整链接
+		toKinDetails() {
+			this.$router.replace(`/kin/${this.kid}`);
+		},
 		moreClick(event) {
 			this.footerIsActive = !this.footerIsActive;
 			console.log(event);
@@ -148,7 +158,10 @@ a {
 	border-radius: 16px;
 	max-width: 100%;
 }
-
+img[lazy="loading"] {
+	background-color: var(--loading-bgc);
+	height: var(--loading-height);
+}
 .kin-footer {
 	position: relative;
 	padding: 8px 6px 16px 6px;

@@ -21,8 +21,8 @@ const routes = [
     component: Login,
   },
   {
-    // path: "/kin/:kid",
-    path: "/kin",
+    path: "/kin/:kid",
+    // path: "/kin",
     name: "Details",
     component: Details,
     props: true,

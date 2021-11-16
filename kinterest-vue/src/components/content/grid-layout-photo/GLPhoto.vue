@@ -134,6 +134,8 @@ export default {
 	},
 	mounted() {
 		window.addEventListener("resize", this.reflows);
+		// 监听图片懒加载，当懒加载完成即loaded，就更新页面
+		this.$Lazyload.$on("loaded", this.reflows);
 	},
 	destroyed() {
 		window.removeEventListener("resize", this.reflows);
@@ -145,7 +147,6 @@ export default {
 		moreClick(x, y) {
 			this.$emit("more1Click", x, y);
 		},
-
 		/**
 		 * 防抖包装
 		 */
@@ -216,8 +217,9 @@ export default {
 		},
 		// 计算一行可以放下几个kin-item，具有几个column
 		getColumnCount(maxW) {
-			return parseInt(maxW / this.kinWidth) > 7
-				? 7
+			// 安全宽度，最多只有6列
+			return parseInt(maxW / this.kinWidth) > 6
+				? 6
 				: parseInt(maxW / this.kinWidth);
 		},
 		// 设置item-kin的transform
@@ -229,11 +231,10 @@ export default {
 		},
 		// 设置图片属性，高度、色块
 		setImgStyle(obj) {
-			// ！！！！后期需要修改，接口数据直接拿到图片 高度进行设置
-			// this.$children.forEach((child) => {
-			// 获取图片高度
-			// console.log(obj.$el.querySelectorAll(".kin-wrapper"));
-			let h = obj.$el.querySelectorAll(".kin-wrapper")[0].scrollHeight;
+			// ！！！！后期需要修改，接口数据直接拿到图片的高度进行设置
+			// 精准获取图片的高度
+			let h = obj.$el.querySelectorAll(".kin-wrapper img")[0].height;
+
 			// console.log(h);
 
 			// 设置padding-bottom
