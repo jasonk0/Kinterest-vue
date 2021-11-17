@@ -39,6 +39,10 @@ const routes = [
     component: Board,
     props: true,
   },
+  {
+    path: "*",
+    redirect: "/",
+  },
 ];
 
 const router = new VueRouter({

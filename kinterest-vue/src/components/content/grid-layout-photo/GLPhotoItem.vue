@@ -105,9 +105,9 @@ export default {
 		this.$emit("itemLoaded");
 	},
 	methods: {
-		// 统一采用$router.replace()进行站内跳转，a标签需要的是完整链接
+		// 统一采用$router.push()进行站内跳转，a标签需要的是完整链接
 		toKinDetails() {
-			this.$router.replace(`/kin/${this.kid}`);
+			this.$router.push(`/kin/${this.kid}`);
 		},
 		moreClick(event) {
 			this.footerIsActive = !this.footerIsActive;

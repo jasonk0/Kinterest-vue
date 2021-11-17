@@ -82,7 +82,7 @@ export default {
 		// // 绑定点击跳转路由，大页面用replace比较好
 		itemClick() {
 			if (this.path) {
-				this.$router.replace(this.path);
+				this.$router.push(this.path);
 			} else {
 				this.$emit("bOnClick");
 			}

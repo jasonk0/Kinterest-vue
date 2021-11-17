@@ -1,6 +1,6 @@
 <template>
-	<div class="card-item">
-		<div class="wrapper-for-modal">
+	<div class="card-item" @click="boardClick">
+		<div class="wrapper-for-modal" >
 			<div class="card-content wrapper">
 				<div class="left-img"><div :style="leftStyle"></div></slot></div>
 				<div class="right-img wrapper">
@@ -45,6 +45,11 @@ export default {
 			lastOpend: "",
 		},
 	},
+	data() {
+		return {
+			path: "/:id/:name",
+		};
+	},
 	computed: {
 		leftStyle() {
 			return !(this.boards.url0 === "")
@@ -81,6 +86,11 @@ export default {
 						// backgroundColor: "rgb(239,239,239)",
 				  }
 				: {};
+		},
+	},
+	methods: {
+		boardClick() {
+			this.$router.push(this.path);
 		},
 	},
 };

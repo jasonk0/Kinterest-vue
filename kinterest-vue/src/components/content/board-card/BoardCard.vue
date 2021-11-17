@@ -2,68 +2,74 @@
 	<div class="board">
 		<div class="board-tab">
 			<div class="bt-left">
-				<Button
-					:isActives="leftActive"
-					backColor="#fff"
-					activeFontColor="#fff"
-					@bOnClick="sortListClick"
-					><template #button-content>
-						<svg
-							class="icon"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							version="1.1"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="#111111"
-						>
-							<path
-								d="M9 19.5a1.75 1.75 0 1 1 .001-3.501A1.75 1.75 0 0 1 9 19.5M22.25 16h-8.321c-.724-2.034-2.646-3.5-4.929-3.5S4.795 13.966 4.071 16H1.75a1.75 1.75 0 0 0 0 3.5h2.321C4.795 21.534 6.717 23 9 23s4.205-1.466 4.929-3.5h8.321a1.75 1.75 0 0 0 0-3.5M15 4.5a1.75 1.75 0 1 1-.001 3.501A1.75 1.75 0 0 1 15 4.5M1.75 8h8.321c.724 2.034 2.646 3.5 4.929 3.5s4.205-1.466 4.929-3.5h2.321a1.75 1.75 0 0 0 0-3.5h-2.321C19.205 2.466 17.283 1 15 1s-4.205 1.466-4.929 3.5H1.75a1.75 1.75 0 0 0 0 3.5"
-							/>
-						</svg> </template
-				></Button>
-				<ListTag
-					:isActive="leftActive"
-					:showInPos="leftPos"
-					:lists="listDesc[0]"
-				/>
+				<slot name="left">
+					<Button
+						:isActives="leftActive"
+						backColor="#fff"
+						activeFontColor="#fff"
+						@bOnClick="sortListClick"
+						><template #button-content>
+							<svg
+								class="icon"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								version="1.1"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="#111111"
+							>
+								<path
+									d="M9 19.5a1.75 1.75 0 1 1 .001-3.501A1.75 1.75 0 0 1 9 19.5M22.25 16h-8.321c-.724-2.034-2.646-3.5-4.929-3.5S4.795 13.966 4.071 16H1.75a1.75 1.75 0 0 0 0 3.5h2.321C4.795 21.534 6.717 23 9 23s4.205-1.466 4.929-3.5h8.321a1.75 1.75 0 0 0 0-3.5M15 4.5a1.75 1.75 0 1 1-.001 3.501A1.75 1.75 0 0 1 15 4.5M1.75 8h8.321c.724 2.034 2.646 3.5 4.929 3.5s4.205-1.466 4.929-3.5h2.321a1.75 1.75 0 0 0 0-3.5h-2.321C19.205 2.466 17.283 1 15 1s-4.205 1.466-4.929 3.5H1.75a1.75 1.75 0 0 0 0 3.5"
+								/>
+							</svg> </template
+					></Button>
+					<ListTag
+						:isActive="leftActive"
+						:showInPos="leftPos"
+						:lists="listDesc[0]"
+					/>
+				</slot>
 			</div>
 
 			<div class="bt-right">
-				<Button
-					backColor="#fff"
-					activeFontColor="#fff"
-					@bOnClick="addListClick"
-					:isActives="rightActive"
-					><template #button-content>
-						<svg
-							class="icon"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							version="1.1"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"
-							/>
-						</svg> </template
-				></Button>
-				<ListTag
-					:isActive="rightActive"
-					:showInPos="rightPos"
-					:lists="listDesc[1]"
-				/>
+				<slot name="right">
+					<Button
+						backColor="#fff"
+						activeFontColor="#fff"
+						@bOnClick="addListClick"
+						:isActives="rightActive"
+						><template #button-content>
+							<svg
+								class="icon"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								version="1.1"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"
+								/>
+							</svg> </template
+					></Button>
+					<ListTag
+						:isActive="rightActive"
+						:showInPos="rightPos"
+						:lists="listDesc[1]"
+					/>
+				</slot>
 			</div>
 		</div>
 		<div class="board-card">
-			<div
-				class="bd-grid-item"
-				v-for="(items, index) in boardLists"
-				:key="index"
-			>
-				<CardItem :boards="items"> </CardItem>
-			</div>
+			<slot name="board-card">
+				<div
+					class="bd-grid-item"
+					v-for="(items, index) in boardLists"
+					:key="index"
+				>
+					<CardItem :boards="items"> </CardItem>
+				</div>
+			</slot>
 		</div>
 	</div>
 </template>
@@ -216,7 +222,12 @@ export default {
 	justify-content: center;
 	align-items: center; */
 }
-
+.bt-left,
+.bt-right .text {
+	font-size: 20px;
+	font-weight: 500;
+	width: auto !important;
+}
 /* .bt-left,
 .bt-right .button-item {
 	margin: 0px;
